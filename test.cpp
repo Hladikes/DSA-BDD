@@ -114,6 +114,8 @@ int main(int argc, char** argv) {
       << "\t\t" << printJSON<string>("expression", expression) << "," << endl
       << "\t\t" << printJSON<double>("createDuration", createDuration) << "," << endl
       << "\t\t" << printJSON<double>("useDuration", useDuration) << "," << endl
+      << "\t\t" << printJSON<double>("nodesCount", bdd.nodesCount) << "," << endl
+      << "\t\t" << printJSON<double>("reducedNodesCount", bdd.reducedNodesCount) << "," << endl
       << "\t\t" << printJSON<bool>("vectorsAreEqual", out == bdd.vector) << endl
       << "\t}" 
       << ((count != numberOfCycles - 1) ? "," : " ")
