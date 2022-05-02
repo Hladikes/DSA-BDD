@@ -2,5 +2,5 @@
 for ((i = 13; i <= 26; i++))
 do
   echo -e "\nTesting for " $i
-  ./test $i 10
+  ./test $i 10 # TODO ZMENIT NA 100
 done
