@@ -76,7 +76,6 @@ int main(int argc, char** argv) {
 
   string order = generateOrder(orderLength);
   
-  // cout << "expression,createDuration,useDuraion,vectorsEqual" << endl;
   cout << "[" << endl;
 
   for (size_t count = 0; count < numberOfCycles; count++) {
