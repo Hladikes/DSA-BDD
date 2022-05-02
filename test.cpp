@@ -5,6 +5,7 @@
 #include <sstream>
 
 #include "bdd.hpp"
+#include "jhvolka_dnfgen.hpp"
 
 #define RANDBOOL (rand() % 2 == 1)
 
@@ -36,18 +37,17 @@ string generateOrder(size_t length) {
   return order;
 }
 
-string generateRandomExpression(string order) {
-  string output = "";  
+// string generateRandomExpression(string order) {
+//   string output = "";  
 
-  for (size_t idx = 0; idx < order.length() - 1; idx++) {
-    if (idx != 0 && RANDBOOL) output += "+";
-    if (RANDBOOL) output += "!";
-    output += order[idx];
-  }
+//   for (size_t idx = 0; idx < order.length() - 1; idx++) {
+//     if (idx != 0 && RANDBOOL) output += "+";
+//     if (RANDBOOL) output += "!";
+//     output += order[idx];
+//   }
 
-  return output;
-}
-
+//   return output;
+// }
 
 template<class T>
 string printJSON (string key, T value) {
@@ -79,7 +79,8 @@ int main(int argc, char** argv) {
   cout << "[" << endl;
 
   for (size_t count = 0; count < numberOfCycles; count++) {
-    string expression = generateRandomExpression(order);
+    // string expression = generateRandomExpression(order);
+    string expression = jhvolka::generateExpression(order);
     
     double createDuration = 0;
     double useDuration = 0;
@@ -113,7 +114,7 @@ int main(int argc, char** argv) {
       << "\t\t" << printJSON<string>("expression", expression) << "," << endl
       << "\t\t" << printJSON<double>("createDuration", createDuration) << "," << endl
       << "\t\t" << printJSON<double>("useDuration", useDuration) << "," << endl
-      << "\t\t" << printJSON<double>("nodesCount", bdd.nodesCount) << "," << endl
+      << "\t\t" << printJSON<double>("nodesCountFull", bdd.nodesCountFull) << "," << endl
       << "\t\t" << printJSON<double>("reducedNodesCount", bdd.reducedNodesCount) << "," << endl
       << "\t\t" << printJSON<bool>("vectorsAreEqual", out == bdd.vector) << endl
       << "\t}" 
