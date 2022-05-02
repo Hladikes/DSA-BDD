@@ -81,8 +81,8 @@ int main(int argc, char** argv) {
     string out = "";
 
     for (size_t n = 0; n < rowsCount; n++) {
-      string bin = bitset<128>(n).to_string();
-      combinations.push_back(bin.substr(128 - orderLength));
+      string bin = bitset<1024>(n).to_string();
+      combinations.push_back(bin.substr(1024 - orderLength));
     }
 
     MEASURE_SAVE(useDuration, {
