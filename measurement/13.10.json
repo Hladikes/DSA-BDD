@@ -1,0 +1,14 @@
+[
+	{
+		"expression": "!A!B+!C+D!E+F+G+!HIJ!K!L",
+		"createDuration": 0.0775453,
+		"useDuration": 0.0222139,
+		"vectorsAreEqual": 1
+	},
+	{
+		"expression": "!AB!C+!D+EF+!G+H+I+!J+!K!L",
+		"createDuration": 0.200851,
+		"useDuration": 0.0269144,
+		"vectorsAreEqual": 1
+	} 
+]
