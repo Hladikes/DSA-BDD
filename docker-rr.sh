@@ -6,4 +6,4 @@ IMAGE_ID="$(docker images | grep "bdd" | xargs | cut -d " " -f 3 | xargs)"
 docker rmi $IMAGE_ID
 
 docker build . -t bdd
-docker run bdd
+docker run -v $(pwd)/measurement:/app/measurement bdd
