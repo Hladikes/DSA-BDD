@@ -11,4 +11,4 @@ RUN apt-get update
 RUN apt-get -y install g++-10
 RUN g++-10 -std=gnu++20 -m64 -O2 -o test test.cpp
 
-CMD [ "./test", "15", "100" ]
+CMD [ "./loop.sh" ]
