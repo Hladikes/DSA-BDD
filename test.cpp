@@ -2,6 +2,7 @@
 #include <bitset>
 #include <chrono>
 #include <cstdlib>
+#include <sstream>
 
 #include "bdd.hpp"
 
@@ -48,6 +49,22 @@ string generateRandomExpression(string order) {
 }
 
 
+template<class T>
+string printJSON (string key, T value) {
+  stringstream ss;
+  ss << "\"" << key << "\": ";
+  
+  if constexpr (is_arithmetic<T>::value) {
+    ss << value;
+  }
+  
+  else  {
+    ss << "\"" << value << "\"";
+  }
+  
+  return ss.str();
+}
+
 int main(int argc, char** argv) {
   if (argc != 3) {
     cout << "Invalid arguments; ./test <number of variables> <number of repeat cycles>" << endl;
@@ -59,7 +76,8 @@ int main(int argc, char** argv) {
 
   string order = generateOrder(orderLength);
   
-  cout << "expression,createDuration,useDuraion,vectorsEqual" << endl;
+  // cout << "expression,createDuration,useDuraion,vectorsEqual" << endl;
+  cout << "[" << endl;
 
   for (size_t count = 0; count < numberOfCycles; count++) {
     string expression = generateRandomExpression(order);
@@ -92,12 +110,17 @@ int main(int argc, char** argv) {
     });
 
     cout 
-      << expression << "," 
-      << createDuration << "," 
-      << useDuration << "," 
-      << (out == bdd.vector)
+      << "\t{" << endl
+      << "\t\t" << printJSON<string>("expression", expression) << "," << endl
+      << "\t\t" << printJSON<double>("createDuration", createDuration) << "," << endl
+      << "\t\t" << printJSON<double>("useDuration", useDuration) << "," << endl
+      << "\t\t" << printJSON<bool>("vectorsAreEqual", out == bdd.vector) << endl
+      << "\t}" 
+      << ((count != numberOfCycles - 1) ? "," : " ")
       << endl;
   }
+
+  cout << "]" << endl;
 
   return 0;
 }
