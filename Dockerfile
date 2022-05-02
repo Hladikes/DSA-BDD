@@ -4,6 +4,7 @@ WORKDIR /app
 
 COPY test.cpp test.cpp
 COPY bdd.hpp bdd.hpp
+COPY jhvolka_dnfgen.hpp jhvolka_dnfgen.hpp
 COPY loop.sh loop.sh
 
 RUN chmod 777 ./loop.sh
