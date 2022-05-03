@@ -7,9 +7,9 @@ COPY bdd.hpp bdd.hpp
 COPY jhvolka_dnfgen.hpp jhvolka_dnfgen.hpp
 COPY loop.sh loop.sh
 
-ENV min=13
-ENV max=26
-ENV fncount=5
+ENV min 13
+ENV max 26
+ENV fncount 5
 
 RUN chmod 777 ./loop.sh
 RUN apt-get update
