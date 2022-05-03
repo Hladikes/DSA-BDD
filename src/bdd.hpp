@@ -36,10 +36,10 @@ size_t Node::counter = 0;
 
 
 string calculateVector(const string& expression, const string& order) {
-  size_t expressionLength = expression.length();
-  size_t variablesCount = order.length();
-  size_t rowsCount = EXP2(variablesCount);
-  size_t tableSize = rowsCount * variablesCount;
+  const size_t expressionLength = expression.length();
+  const size_t variablesCount = order.length();
+  const size_t rowsCount = EXP2(variablesCount);
+  const size_t tableSize = rowsCount * variablesCount;
 
   bool variablesLookupTable[128];
   string outputVector = "";
@@ -91,7 +91,7 @@ string calculateVector(const string& expression, const string& order) {
 
 map<string, shared_ptr<Node>> getUniqueVectorNodeMap(const string& vector) {
   map<string, shared_ptr<Node>> vectorNodeMap;
-  size_t vectorLength = vector.length();
+  const size_t vectorLength = vector.length();
 
   for (size_t n = 0; EXP2(n) <= vectorLength; n++) {
     string buffer = "";
@@ -132,7 +132,7 @@ shared_ptr<Node> getClosestUniqueNode(string vector, map<string, shared_ptr<Node
 
 
 shared_ptr<Node> constructDiagram(string vector, map<string, shared_ptr<Node>>& vectorNodesMap) {
-  shared_ptr<Node> parent = getClosestUniqueNode(vector, vectorNodesMap);
+  const shared_ptr<Node> parent = getClosestUniqueNode(vector, vectorNodesMap);
 
   if (parent->vector.length() == 1) {
     return parent;
