@@ -3,6 +3,7 @@
 #include <map>
 #include <random>
 #include <memory>
+#include <sstream>
 
 #define EXP2(n) (1 << n)
 
@@ -41,7 +42,7 @@ string calculateVector(const string& expression, const string& order) {
   const size_t tableSize = rowsCount * variablesCount;
 
   bool variablesLookupTable[128];
-  string outputVector = "";
+  stringstream outputVectorStream;
 
   for (size_t n = 0; n < rowsCount; n++) {
     for (size_t v = 0; v < variablesCount; v++) {
@@ -80,10 +81,10 @@ string calculateVector(const string& expression, const string& order) {
     vectorBit |= vectorBitBuffer;
 
     nextRow: {};
-    outputVector += vectorBit ? "1" : "0";
+    outputVectorStream << vectorBit ? "1" : "0";
   }
 
-  return outputVector;
+  return outputVectorStream.str();
 }
 
 
@@ -92,26 +93,27 @@ map<string, shared_ptr<Node>> getUniqueVectorNodeMap(const string& vector) {
   map<string, shared_ptr<Node>> vectorNodeMap;
   const size_t vectorLength = vector.length();
 
-  for (size_t n = 0; EXP2(n) <= vectorLength; n++) {
-    string buffer = "";
+  stringstream bufferStream;
 
+  for (size_t n = 0; EXP2(n) <= vectorLength; n++) {
     for (size_t i = 0; i < vectorLength; i++) {
-      buffer += vector[i];
+      bufferStream << vector[i];
 
       if ((i + 1) % (vectorLength / EXP2(n)) != 0) {
         continue;
       }
 
+      const string buffer = bufferStream.str();
       const string bufferLeft = buffer.substr(0, buffer.length() / 2);
       const string bufferRight = buffer.substr(buffer.length() / 2);
 
       if (bufferLeft == bufferRight) {
-        buffer = "";
+        bufferStream.str("");
         continue;
       }
 
       vectorNodeMap.try_emplace(buffer, make_shared<Node>(buffer, n));
-      buffer = "";
+      bufferStream.str("");
     }
   }
 
