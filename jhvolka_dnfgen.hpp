@@ -39,13 +39,13 @@ namespace jhvolka {
     // Initialize random device and distribution
     std::random_device        rd;
     std::mt19937          gen(rd());
-    std::uniform_int_distribution<> distrib(0, 1);
+    std::uniform_int_distribution<> distrib(0, 6);
 
     std::stringstream out;
         
     // Randomly print about half ot the generated literals
     for (const auto &s: permutations) {
-      if (distrib(gen)) {
+      if (distrib(gen) == 0) {
         out << (first ? "" : "+") << s;
         first = false;
       }
