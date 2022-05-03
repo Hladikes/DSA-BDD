@@ -1,0 +1,1 @@
+g++-10 -std=gnu++20 -m64 -O2 -o ./bin/test ./src/test.cpp
