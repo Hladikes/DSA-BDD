@@ -88,7 +88,6 @@ string calculateVector(const string& expression, const string& order) {
 }
 
 
-
 map<string, shared_ptr<Node>> getUniqueVectorNodeMap(const string& vector) {
   map<string, shared_ptr<Node>> vectorNodeMap;
   const size_t vectorLength = vector.length();
@@ -121,7 +120,6 @@ map<string, shared_ptr<Node>> getUniqueVectorNodeMap(const string& vector) {
 }
 
 
-
 shared_ptr<Node> getClosestUniqueNode(string vector, map<string, shared_ptr<Node>>& vectorNodesMap) {
   if (vectorNodesMap.contains(vector)) {
     return vectorNodesMap[vector];
@@ -129,7 +127,6 @@ shared_ptr<Node> getClosestUniqueNode(string vector, map<string, shared_ptr<Node
 
   return getClosestUniqueNode(vector.substr(vector.length() / 2), vectorNodesMap);
 }
-
 
 
 shared_ptr<Node> constructDiagram(string vector, map<string, shared_ptr<Node>>& vectorNodesMap) {
@@ -146,19 +143,19 @@ shared_ptr<Node> constructDiagram(string vector, map<string, shared_ptr<Node>>& 
 }
 
 
-
 char useDiagram(shared_ptr<Node>& diagram, const string& order) {
   auto root = diagram;
 
   for (size_t idx = 0; idx < order.length(); idx++) {
-    if (idx != root->depth) continue;
+    if (idx != root->depth) {
+      continue;
+    }
 
     root = (order[idx] == '0') ? root->left : root->right;
   }
 
   return root->vector[0];
 }
-
 
 
 void printDiagram(string prefix, shared_ptr<Node>& node, bool left) {
