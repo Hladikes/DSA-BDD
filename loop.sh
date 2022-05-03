@@ -7,4 +7,4 @@ do
   ./bin/test $i $3 >>./measurement/${i}.${3}.json &
 done
 wait
-zip -r measurement.zip measurement
+zip -r measurement/measurement.zip measurement
