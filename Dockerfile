@@ -2,6 +2,7 @@ FROM ubuntu:focal
 
 WORKDIR /app
 
+COPY bin/ bin/
 COPY src/ src/
 COPY loop.sh loop.sh
 
