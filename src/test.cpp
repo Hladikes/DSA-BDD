@@ -110,14 +110,15 @@ int main(int argc, char** argv) {
     });
 
     cout 
-      << "\t{" << endl
-      << "\t\t" << printJSON<size_t>("expressionLength", expression.length()) << "," << endl
-      << "\t\t" << printJSON<double>("createDuration", createDuration) << "," << endl
-      << "\t\t" << printJSON<double>("useDuration", useDuration) << "," << endl
-      << "\t\t" << printJSON<double>("nodesCountFull", bdd.nodesCountFull) << "," << endl
-      << "\t\t" << printJSON<double>("reducedNodesCount", bdd.reducedNodesCount) << "," << endl
-      << "\t\t" << printJSON<bool>("vectorsAreEqual", out == bdd.vector) << endl
-      << "\t}" 
+      << "  {" << endl
+      << "    " << printJSON<size_t>("expressionLength", expression.length()) << "," << endl
+      << "    " << printJSON<double>("createDuration", createDuration) << "," << endl
+      << "    " << printJSON<double>("useDuration", useDuration) << "," << endl
+      << "    " << printJSON<double>("nodesCountFull", bdd.nodesCountFull) << "," << endl
+      << "    " << printJSON<double>("reducedNodesCount", bdd.reducedNodesCount) << "," << endl
+      << "    " << printJSON<double>("reductionRate", bdd.reductionRate) << "," << endl
+      << "    " << printJSON<bool>("vectorsAreEqual", out == bdd.vector) << endl
+      << "  }" 
       << ((count != numberOfCycles - 1) ? "," : " ")
       << endl;
   }

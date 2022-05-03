@@ -179,6 +179,7 @@ class BDD {
     string vector = "";
     size_t nodesCountFull = 0;
     size_t reducedNodesCount = 0;
+    double reductionRate = 0.0;
 
     void create(const string& expression, const string& order) {
       this->vector = calculateVector(expression, order);
@@ -186,6 +187,11 @@ class BDD {
       auto vectorNodesMap = getUniqueVectorNodeMap(this->vector);
       this->reducedNodesCount = vectorNodesMap.size();
       this->root = constructDiagram(this->vector, vectorNodesMap);
+
+      // Calculate reduction rate
+      double fullCount = static_cast<double>(this->nodesCountFull);
+      double reducedCount = static_cast<double>(this->reducedNodesCount);
+      this->reductionRate = (fullCount - reducedCount) / fullCount * 100.0;
     };
 
     char use(const string& order) {
