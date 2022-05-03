@@ -12,6 +12,6 @@ ENV FNCOUNT 5
 RUN chmod 777 ./loop.sh
 RUN apt-get update
 RUN apt-get -y install g++-10
-RUN g++-10 -std=gnu++20 -m64 -O2 -o ./bin/test test.cpp
+RUN g++-10 -std=gnu++20 -m64 -O2 -o ./bin/test ./src/test.cpp
 
 CMD ./loop.sh $MIN $MAX $FNCOUNT
