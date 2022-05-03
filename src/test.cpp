@@ -37,17 +37,17 @@ string generateOrder(size_t length) {
   return order;
 }
 
-// string generateRandomExpression(string order) {
-//   string output = "";  
+string generateRandomExpression(string order) {
+  string output = "";  
 
-//   for (size_t idx = 0; idx < order.length() - 1; idx++) {
-//     if (idx != 0 && RANDBOOL) output += "+";
-//     if (RANDBOOL) output += "!";
-//     output += order[idx];
-//   }
+  for (size_t idx = 0; idx < order.length() - 1; idx++) {
+    if (idx != 0 && RANDBOOL) output += "+";
+    if (RANDBOOL) output += "!";
+    output += order[idx];
+  }
 
-//   return output;
-// }
+  return output;
+}
 
 template<class T>
 string printJSON (string key, T value) {
