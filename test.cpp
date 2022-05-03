@@ -111,7 +111,7 @@ int main(int argc, char** argv) {
 
     cout 
       << "\t{" << endl
-      << "\t\t" << printJSON<string>("expression", expression) << "," << endl
+      << "\t\t" << printJSON<size_t>("expressionLength", expression.length()) << "," << endl
       << "\t\t" << printJSON<double>("createDuration", createDuration) << "," << endl
       << "\t\t" << printJSON<double>("useDuration", useDuration) << "," << endl
       << "\t\t" << printJSON<double>("nodesCountFull", bdd.nodesCountFull) << "," << endl
