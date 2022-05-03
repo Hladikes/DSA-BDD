@@ -7,13 +7,14 @@ COPY bdd.hpp bdd.hpp
 COPY jhvolka_dnfgen.hpp jhvolka_dnfgen.hpp
 COPY loop.sh loop.sh
 
-ENV min 13
-ENV max 26
-ENV fncount 5
+ENV MIN 13
+ENV MAX 26
+ENV FNCOUNT 5
 
 RUN chmod 777 ./loop.sh
 RUN apt-get update
 RUN apt-get -y install g++-10
 RUN g++-10 -std=gnu++20 -m64 -O2 -o test test.cpp
 
-CMD [ "./loop.sh", "${min}", "${max}", "${fncount}" ]
+# CMD [ "./loop.sh", "${MIN}", "${MAX}", "${FNCOUNT}" ]
+CMD ./loop.sh $MIN $MAX $FNCOUNT
