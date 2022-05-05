@@ -9,18 +9,6 @@
 
 #define RANDBOOL (rand() % 2 == 1)
 
-#define MEASURE(tag, code) \
-  { \
-    cout << tag; \
-    auto start = chrono::steady_clock::now(); \
-    code; \
-    auto end = chrono::steady_clock::now(); \
-    cout << " took " \
-              << (double) (chrono::duration_cast<chrono::nanoseconds> \
-                      (end - start).count()) / 1000000000.0 << "s" \
-              << endl; \
-  }
-
 #define MEASURE_SAVE(durationvar, code) \
   { \
     auto start = chrono::steady_clock::now(); \
