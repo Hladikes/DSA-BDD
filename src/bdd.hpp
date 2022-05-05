@@ -181,7 +181,7 @@ class BDD {
 
     void create(const string& expression, const string& order) {
       this->vector = calculateVector(expression, order);
-      this->nodesCountFull = vector.length() * 2;
+      this->nodesCountFull = vector.length() * 2 - 1;
       auto vectorNodesMap = getUniqueVectorNodeMap(this->vector);
       this->reducedNodesCount = vectorNodesMap.size();
       this->root = constructDiagram(this->vector, vectorNodesMap);
