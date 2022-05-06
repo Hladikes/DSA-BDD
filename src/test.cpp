@@ -3,9 +3,9 @@
 #include <chrono>
 #include <cstdlib>
 #include <sstream>
+#include <set>
 
 #include "bdd.hpp"
-#include "jhvolka_dnfgen.hpp"
 
 #define RANDBOOL (rand() % 2 == 1)
 
@@ -26,15 +26,27 @@ string generateOrder(size_t length) {
 }
 
 string generateRandomExpression(string order) {
-  string output = "";  
+  const size_t numberOfClauses = EXP2(order.length()) / 10;
 
-  for (size_t idx = 0; idx < order.length() - 1; idx++) {
-    if (idx != 0 && RANDBOOL) output += "+";
-    if (RANDBOOL) output += "!";
-    output += order[idx];
+  string output = "";
+  set<string> clauses;
+
+  while (clauses.size() != numberOfClauses) {
+    string clause = "";
+    
+    for (size_t idx = 0; idx < order.length(); idx++) {
+      if (RANDBOOL) clause += "!";
+      clause += order[idx];
+    }
+
+    clauses.insert(clause);
   }
 
-  return output;
+  for (const string clause : clauses) {
+    output += clause + "+";
+  }
+
+  return output.substr(0, output.length() - 1);
 }
 
 template<class T>
@@ -67,8 +79,7 @@ int main(int argc, char** argv) {
   cout << "[" << endl;
 
   for (size_t count = 0; count < numberOfCycles; count++) {
-    // string expression = generateRandomExpression(order);
-    string expression = jhvolka::generateExpression(order);
+    string expression = generateRandomExpression(order);
     
     double createDuration = 0;
     double useDuration = 0;
@@ -100,6 +111,8 @@ int main(int argc, char** argv) {
     cout 
       << "  {" << endl
       << "    " << printJSON<size_t>("expressionLength", expression.length()) << "," << endl
+      << "    " << printJSON<double>("vectorEvaluationDuration", bdd.vectorEvaluationDuration) << "," << endl
+      << "    " << printJSON<double>("diagramConstructionDuration", bdd.diagramConstructionDuration) << "," << endl
       << "    " << printJSON<double>("createDuration", createDuration) << "," << endl
       << "    " << printJSON<double>("useDuration", useDuration) << "," << endl
       << "    " << printJSON<double>("nodesCountFull", bdd.nodesCountFull) << "," << endl

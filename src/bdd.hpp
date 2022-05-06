@@ -7,6 +7,14 @@
 
 #define EXP2(n) (1 << n)
 
+#define MEASURE_SAVE(durationvar, code) \
+  { \
+    auto start = chrono::steady_clock::now(); \
+    code; \
+    auto end = chrono::steady_clock::now(); \
+    durationvar = (double) (chrono::duration_cast<chrono::nanoseconds>(end - start).count()) / 1000000000.0; \
+  }
+
 #ifndef BINARY_DECISION_DIAGRAM
 #define BINARY_DECISION_DIAGRAM
 
@@ -175,17 +183,28 @@ class BDD {
 
   public:
     string vector = "";
+    string originalOrder = "";
     size_t nodesCountFull = 0;
     size_t reducedNodesCount = 0;
     double reductionRate = 0.0;
+    double vectorEvaluationDuration = 0.0;
+    double diagramConstructionDuration = 0.0;
 
     void create(const string& expression, const string& order) {
-      this->vector = calculateVector(expression, order);
+      this->originalOrder = order;
+      
+      MEASURE_SAVE(this->vectorEvaluationDuration, {
+        this->vector = calculateVector(expression, order);
+      })
+
       this->nodesCountFull = vector.length() * 2 - 1;
       auto vectorNodesMap = getUniqueVectorNodeMap(this->vector);
       this->reducedNodesCount = vectorNodesMap.size();
-      this->root = constructDiagram(this->vector, vectorNodesMap);
 
+      MEASURE_SAVE(this->diagramConstructionDuration, {
+        this->root = constructDiagram(this->vector, vectorNodesMap);
+      })
+      
       // Calculate reduction rate
       double fullCount = static_cast<double>(this->nodesCountFull);
       double reducedCount = static_cast<double>(this->reducedNodesCount);
@@ -193,6 +212,11 @@ class BDD {
     };
 
     char use(const string& order) {
+      if (order.length() != originalOrder.length()) {
+        cout << "[ERROR] Invalid order size. Order size must be equal to the original order size." << endl;
+        return -1;
+      }
+
       return useDiagram(this->root, order);
     };
 };
