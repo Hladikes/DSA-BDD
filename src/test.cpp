@@ -3,11 +3,10 @@
 #include <chrono>
 #include <cstdlib>
 #include <sstream>
+#include <random>
 #include <set>
 
 #include "bdd.hpp"
-
-#define RANDBOOL (rand() % 2 == 1)
 
 #define MEASURE_SAVE(durationvar, code) \
   { \
@@ -16,6 +15,12 @@
     auto end = chrono::steady_clock::now(); \
     durationvar = (double) (chrono::duration_cast<chrono::nanoseconds>(end - start).count()) / 1000000000.0; \
   }
+
+// https://martin.ankerl.com/2018/12/08/fast-random-bool/
+bool generatRandomBool() {
+  mt19937 rng(random_device{}());
+  return uniform_int_distribution<>{0, 1}(rng);
+}
 
 string generateOrder(size_t length) {
   string order = "";
@@ -35,7 +40,7 @@ string generateRandomExpression(string order) {
     string clause = "";
     
     for (size_t idx = 0; idx < order.length(); idx++) {
-      if (RANDBOOL) clause += "!";
+      if (generatRandomBool()) clause += "!";
       clause += order[idx];
     }
 
