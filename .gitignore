@@ -1,6 +1,3 @@
-# Ignore testing results
-*.json
-
 # For ignoring output binary executables
 # Ignore all
 bin/*

@@ -1,0 +1,46 @@
+[
+  {
+    "expressionLength": 734060,
+    "vectorEvaluationDuration": 638.542,
+    "diagramConstructionDuration": 0.0618356,
+    "createDuration": 638.81,
+    "useDuration": 0.0254691,
+    "nodesCountFull": 524287,
+    "reducedNodesCount": 15280,
+    "reductionRate": 97.0856,
+    "vectorsAreEqual": 1
+  },
+  {
+    "expressionLength": 733562,
+    "vectorEvaluationDuration": 631.482,
+    "diagramConstructionDuration": 0.0676445,
+    "createDuration": 631.764,
+    "useDuration": 0.024561,
+    "nodesCountFull": 524287,
+    "reducedNodesCount": 15298,
+    "reductionRate": 97.0821,
+    "vectorsAreEqual": 1
+  },
+  {
+    "expressionLength": 733891,
+    "vectorEvaluationDuration": 628.29,
+    "diagramConstructionDuration": 0.0672298,
+    "createDuration": 628.569,
+    "useDuration": 0.0245406,
+    "nodesCountFull": 524287,
+    "reducedNodesCount": 15279,
+    "reductionRate": 97.0858,
+    "vectorsAreEqual": 1
+  },
+  {
+    "expressionLength": 733723,
+    "vectorEvaluationDuration": 472.992,
+    "diagramConstructionDuration": 0.0423109,
+    "createDuration": 473.175,
+    "useDuration": 0.0215555,
+    "nodesCountFull": 524287,
+    "reducedNodesCount": 15253,
+    "reductionRate": 97.0907,
+    "vectorsAreEqual": 1
+  } 
+]
