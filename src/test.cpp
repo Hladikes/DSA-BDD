@@ -16,7 +16,6 @@
     durationvar = (double) (chrono::duration_cast<chrono::nanoseconds>(end - start).count()) / 1000000000.0; \
   }
 
-// https://martin.ankerl.com/2018/12/08/fast-random-bool/
 bool generatRandomBool() {
   mt19937 rng(random_device{}());
   return uniform_int_distribution<>{0, 1}(rng);
