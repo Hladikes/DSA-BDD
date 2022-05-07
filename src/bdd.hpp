@@ -217,6 +217,16 @@ class BDD {
         return -1;
       }
 
+      bool isValidBinary = true;
+      for (char c : order) {
+        isValidBinary = isValidBinary && (c == '1' || c == '0');
+        
+        if (!isValidBinary) {
+          cout << "[ERROR] Invalid input. Only binary strings containing only ones and zeros are accepted." << endl;
+          return -1;
+        }
+      }
+
       return useDiagram(this->root, order);
     };
 };
